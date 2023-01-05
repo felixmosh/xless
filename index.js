@@ -12,7 +12,7 @@ import * as url from "url";
 // Support local development with .env
 import { config } from "dotenv";
 import { uploadImage } from "./src/uploadImage.js";
-import { notifyBXSS, notifyMessage } from "./src/notifyDiscord.js";
+import { notifyBXSS, notifyMessage, notifyOOBCallback } from './src/notifyDiscord.js';
 
 config();
 
