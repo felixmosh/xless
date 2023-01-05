@@ -82,12 +82,12 @@ app.post("/c", async (req, res) => {
 
     try {
       const imgOut = await uploadImage(encoded_screenshot, imgbbApiKey);
-      if (imgOut.data?.display_url) {
+      if (imgOut.data?.url) {
         // Add the URL to our data array, so it will be included on our Slack message
-        data["Screenshot URL"] = imgOut.data.display_url;
+        data["Screenshot URL"] = imgOut.data.url;
       }
     } catch (e) {
-      data["Screenshot URL"] = e.message;
+      data["Screenshot Error"] = e.message;
     }
   }
 

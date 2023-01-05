@@ -70,12 +70,12 @@ export function notifyBXSS(data, webhookUrl) {
       if (name === "Screenshot URL" && value !== "NA") {
         return false;
       } else if (name === "DOM") {
-        value = ["```html", value, "```"].join("\n");
+        value = ["```html", value.slice(0, 4040), "```"].join("\n");
       } else if (["localStorage", "sessionStorage"].includes(name)) {
         try {
           value = [
             "```json",
-            JSON.stringify(JSON.parse(value), null, 2),
+            JSON.stringify(JSON.parse(value), null, 2).slice(0, 4040),
             "```",
           ].join("\n");
         } catch (e) {
@@ -90,7 +90,11 @@ export function notifyBXSS(data, webhookUrl) {
               .map((x) => x.trim())
           )
         );
-        value = ["```json", JSON.stringify(cookie, null, 2), "```"].join("\n");
+        value = [
+          "```json",
+          JSON.stringify(cookie, null, 2).slice(0, 4040),
+          "```",
+        ].join("\n");
       } else if (
         ["Location", "Origin", "Referrer"].includes(name) &&
         value !== "NA"
@@ -99,7 +103,7 @@ export function notifyBXSS(data, webhookUrl) {
       } else if (name === "Remote IP") {
         value = `[${value}](https://whois.domaintools.com/${value})`;
       }
-      return { name, value: value.slice(0, 4080) };
+      return { name, value };
     })
     .filter(Boolean)
     .sort((a, z) => a.name.localeCompare(z.name));

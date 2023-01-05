@@ -10,8 +10,8 @@
       letterRendering: 1,
       allowTaint: true,
       useCORS: true,
-      width: 1024,
-      height: 768,
+      width: 1200,
+      height: 1080,
     })
       .then(function (canvas) {
         return canvas.toDataURL(); // png in dataURL format
