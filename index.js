@@ -12,7 +12,11 @@ import * as url from "url";
 // Support local development with .env
 import { config } from "dotenv";
 import { uploadImage } from "./src/uploadImage.js";
-import { notifyBXSS, notifyMessage, notifyOOBCallback } from './src/notifyDiscord.js';
+import {
+  notifyBXSS,
+  notifyMessage,
+  notifyOOBCallback,
+} from "./src/notifyDiscord.js";
 
 config();
 
@@ -48,25 +52,22 @@ app.get("/test", (req, res) => {
   res.send(`TEST<script src="${url}"></script>`);
 });
 
-app.all("/message", (req, res) => {
-  res.send("ok");
-  res.end();
-
+app.all("/message", async (req, res) => {
   const message = req.query.text || req.body.text || "";
   if (message) {
-    notifyMessage(
+    await notifyMessage(
       {
         message,
       },
       discordIncomingWebhook
     );
   }
+
+  res.send("ok");
+  res.end();
 });
 
 app.post("/c", async (req, res) => {
-  res.send("ok");
-  res.end();
-
   let data = req.body;
 
   // Upload our screenshot and only then send the Slack alert
@@ -95,7 +96,10 @@ app.post("/c", async (req, res) => {
   data["Remote IP"] =
     req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
-  notifyBXSS(data, discordIncomingWebhook);
+  await notifyBXSS(data, discordIncomingWebhook);
+
+  res.send("ok");
+  res.end();
 });
 
 /**
@@ -136,11 +140,11 @@ app.get("/health", async (req, res) => {
   res.end();
 });
 
-app.all("/*", (req, res) => {
+app.all("/*", async (req, res) => {
   const headers = req.headers;
   const body = req.body;
 
-  notifyOOBCallback(
+  await notifyOOBCallback(
     {
       body,
       headers,
