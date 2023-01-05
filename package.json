@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "description": "Xless: The Serverless Blind XSS App.",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "axios": "^1.2.2",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.1",
-    "request": "^2.88.2"
+    "express": "^4.18.2"
   },
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/mazen160/xless/issues"
   },
-  "homepage": "https://github.com/mazen160/xless"
+  "homepage": "https://github.com/mazen160/xless",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
