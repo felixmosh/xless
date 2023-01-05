@@ -140,15 +140,15 @@ app.all("/*", (req, res) => {
   const headers = req.headers;
   const body = req.body;
 
-  // notifyOOBCallback(
-  //   {
-  //     body,
-  //     headers,
-  //     path: req.url,
-  //     remoteIP: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
-  //   },
-  //   discordIncomingWebhook
-  // );
+  notifyOOBCallback(
+    {
+      body,
+      headers,
+      path: req.url,
+      remoteIP: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
+    },
+    discordIncomingWebhook
+  );
 
   res.sendFile(path.join(__dirname, "payload.js"));
 });
