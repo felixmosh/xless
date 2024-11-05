@@ -1,13 +1,19 @@
 {
-    "version": 2,
-    "env": {
+  "version": 2,
+  "env": {
     "DISCORD_INCOMING_WEBHOOK": "@discord-incoming-webhook",
     "IMGBB_API_KEY": "@imgbb-api-key"
-    },
-    "builds": [
-        { "src": "index.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-        { "src": "/.+", "dest": "index.js" }
-      ]
+  },
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.+",
+      "dest": "index.js"
+    }
+  ]
 }
