@@ -1,7 +1,7 @@
 // Xless: The serverlesss Blind XSS app.
 // Author: Mazin Ahmed <mazin@mazinahmed.net>
 (function () {
-  var curScript = document.currentScript;
+  var curScript = (!!document.currentScript && document.currentScript.src) || import.meta?.url;
 
   console.log("Loaded xless.");
 
